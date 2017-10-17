@@ -5,10 +5,6 @@ date: "16 October 2017"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 ## Step 3 - Pre Process the Data prior to Model Fitting
 
 I then processed the training set in the following ways:
