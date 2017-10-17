@@ -81,4 +81,81 @@ I decide to take a smaller random sample to do an initial test on the rf model
 ```
 
 
+## Step 5 - Go back and do some further Pre-Processing
 
+To see if I could gain some further Accuracy I go back to an earlier 
+training set, standardise the columns and perform PCA to compress. I 
+standardise because most of the variables are skewed or non-normal
+
+```{r standardise}
+
+#       stdfn1<-preProcess(trainingC[,-c(1:6,59)],method=c("center","scale"))
+#       trainingDstd<-predict(stdfn1,trainingC[,-c(1:6,59)])
+        
+```
+
+I select a PCA thresshold of 95% in order to explain a lot of variance
+
+```{r PCA}
+
+# preProc<-preProcess(trainingDstd[,-53],method="pca",thresh=0.95)
+
+        # Required 26 variables to capture 95%
+        # Required 20 variables to capture 90%
+
+#        trainingDstdPC<-predict(preProc,trainingDstd[,-53])
+#        trainingDstdPC$classe<-trainingDstd$classe
+```
+
+### Fit another Random Forest to the PCAs but this has a low 80% In sample Error
+
+```{r nextrf}
+       
+      # modvrf2<-train(classe~.,method="rf",data=trainingDstdPC,prox=TRUE)
+      # confusionMatrix(trainingDstdPC$classe,predict(modvrf2,trainingDstdPC))
+
+```
+
+## Step 6 - Settle on the Initial Random Forest Model and Check Out of Sample 
+Error on the Testing and Validation set that were initially removed
+
+Do the required pre processing on the testing and validation sets before 
+running the confusion Matrix over their predictors
+
+```{r OOSE}
+
+        # Step 1: Remove columns with many NAs
+#        testingB<-testing[,c(colnames(training[, colMeans(is.na(training)) <= .2]))]
+
+        # Step 2: Remove "new_window" variable which was found to have nzv
+#        testingC<-testingB[,-6] 
+ 
+        # Remove some of the highly correlated variables
+#        testingD<-testingC[,-c(1:6,10,14:16,25)]
+        
+        # Check Accuracy using rf model
+#       confusionMatrix(testingD$classe,predict(modvrf,testingD)) # Accuracy 98%
+```        
+
+### Accuracy on the testing set is 98%
+
+...And again on the validation data set:
+
+```{r OOSE2}        
+        # Step 1: Remove columns with many NAs
+#        validateB<-validate[,c(colnames(training[, colMeans(is.na(training)) <= .2]))]
+
+        # Step 2: Remove "new_window" variable which was found to have nzv
+#        validateC<-validateB[,-6] 
+
+        # Remove some of the highly correlated variables
+#        validateD<-validateC[,-c(1:6,10,14:16,25)]
+
+        # Check Accuracy using rf model
+#        confusionMatrix(validate$classe,predict(modvrf,validateD)) # Accuracy 99%
+
+```
+
+### Accuracy on the validate set is 99%
+
+### FINISH!
