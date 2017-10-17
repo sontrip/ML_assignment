@@ -1,0 +1,103 @@
+<html>
+
+<head>
+<style type="text/css">
+.knitr .inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage .left {
+  text-align: left;
+}
+.rimage .right {
+  text-align: right;
+}
+.rimage .center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>Read in Data and Initial Observations
+<title>                 </title>
+</head>
+
+<body>
+
+<p> Initially I opened the data in Excel as a first inspection of the columns.
+I spent a bit of time playing around with the read.csv arguments and I also 
+went down the path of using the read_csv function to specify col_types but 
+in the end this is what worked best for me:
+
+</p>
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r">        <span class="hl kwd">setwd</span><span class="hl std">(</span><span class="hl str">&quot;C:/Users/Stephane/Documents/Sonia/Learning/coursera/3_Pract_Machine_Learning/_Assignment&quot;</span><span class="hl std">)</span>
+
+        <span class="hl std">origtrain</span><span class="hl kwb">&lt;-</span><span class="hl kwd">read.csv</span><span class="hl std">(</span><span class="hl str">&quot;pml-training.csv&quot;</span><span class="hl std">,</span>
+                            <span class="hl kwc">na.strings</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;NA&quot;</span><span class="hl std">,</span><span class="hl str">&quot;#DIV/0!&quot;</span><span class="hl std">,</span><span class="hl str">&quot; &quot;</span><span class="hl std">,</span><span class="hl str">&quot;&quot;</span><span class="hl std">),</span>
+                            <span class="hl kwc">stringsAsFactors</span> <span class="hl std">=</span> <span class="hl num">FALSE</span>
+                                    <span class="hl std">)</span>
+
+        <span class="hl kwd">dim</span><span class="hl std">(origtrain)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 19622   160
+</pre></div>
+<div class="source"><pre class="knitr r">        <span class="hl kwd">summary</span><span class="hl std">(</span><span class="hl kwd">as.factor</span><span class="hl std">(origtrain</span><span class="hl opt">$</span><span class="hl std">classe))</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##    A    B    C    D    E 
+## 5580 3797 3422 3216 3607
+</pre></div>
+</div></div>
+
+<p> 
+        
+Error rate will be determined by Confusion Matrix - Accuracy:</p>
+
+
+
+</body>
+</html>
