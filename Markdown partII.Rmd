@@ -1,0 +1,88 @@
+---
+title: "Analysis"
+author: "Sonia Tripolitano"
+date: "16 October 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Step 3 - Pre Process the Data prior to Model Fitting
+
+I then processed the training set in the following ways:
+
+1. Kept only columns with less than 20% NAs
+        (Source: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3701793/)
+
+```{r trainingB}
+# trainingB<-training[, colMeans(is.na(training)) <= .2]
+
+# dim(trainingB)
+
+```        
+
+2.  Identify any remaining columns with NearZeroVariance
+
+```{r trainingC}
+# nearZeroVar(trainingB[,-60],saveMetrics=TRUE)
+
+# trainingC<-trainingB[,-6]
+
+```   
+
+3.  Identify any highly correlated predictors (use threshhold r>90%)
+
+```{r corr}
+ 
+        # M <- abs(cor(trainingC[,7:58]))
+        # diag(M) <-0
+        # which(M>0.9,arr.ind=T)
+        # plot(trainingD[,6+1],trainingD[,6+4])
+        # plot(trainingD[,6+1],trainingD[,6+9])
+        # plot(trainingD[,6+1],trainingD[,6+10])
+
+```   
+
+4.  Remove total_accel_belt, accel_belt_y, accel_belt_z, 
+    accel_belt_x, gyros_arm_y as these are highly correlated with others
+   
+```{r trainingD}     
+
+#        names(trainingC)
+#        trainingD<-trainingC[,-c(1:6,10,14:16,25)]
+
+```   
+
+## Step 4 - Try Model Fitting for initial benchmark
+
+There are still a lot of predictors - 48, but I decide to fit a tree and 
+a Random Forest model to get a sense of Error
+
+### Tree model provides only 57% Accuracy for In Sample Error
+
+```{r tree}
+
+#  modvtree <- train(as.factor(classe)~.,method="rpart",data=trainingD)
+#  confusionMatrix(trainingD$classe,predict(modvtree,trainingD))
+
+```
+
+### Random forest model provides more Accuracy but it take A LONG TIME to run...
+i.e. Overnight...
+
+I decide to take a smaller random sample to do an initial test on the rf model
+
+```{r rf}
+
+#        trainingEa<-trainingD[createDataPartition(trainingD$classe,list=FALSE,p=0.2),]
+        
+#        modvrf<-train(as.factor(classe)~.,method="rf",data=trainingEa,prox=TRUE)
+
+#        confusionMatrix(trainingD$classe,predict(modvrf,trainingD))
+
+```
+
+
+
