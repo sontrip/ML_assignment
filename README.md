@@ -10,7 +10,7 @@ coursera John Hopkins - October 2017
 
 ## Results
 - Initial pml-training.csv data was randomly partitioned 60%/20%/20% into Training, Testing & Validation for Cross Validation
-- Out of Sample Error was 98% on Testing and 99% on Validation
+- Out of Sample Error was determined using Accuracy metric - 98% on Testing and 99% on Validation
 
 ## Pre- Processing
 - Reduced the columns from 160 to 59 by removing those which had greater than 20% missing values
