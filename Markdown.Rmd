@@ -7,6 +7,8 @@ output: html_document
 
 ## Step 1 - Cross Validation; Segmenting into Training, Testing & Validation
 
+(See html file for reading in data) 
+
 Given that there are many observations I decide to segment the original training
 data using the benchmark 60% training/ 20% testing / 20% validation method
 
